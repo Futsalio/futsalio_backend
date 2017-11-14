@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "erwinwahyuramadhan",
-    "password": null,
-    "database": "futsalio",
-    "host": "127.0.0.1",
+    "username": "erwin",
+    "password": "erwin12,.",
+    "database": "futsaliodb",
+    "host": "futsalio-db-instance.c9uvw3ussfnu.ap-southeast-1.rds.amazonaws.com",
     "dialect": "postgres",
     "port": "5432"
   },
