@@ -6,7 +6,11 @@ router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
 
-router.post('/registration', _controllerUser._signUp)
+router.post('/signup', _controllerUser._signUp)
 router.post('/signin', _controllerUser._signIn)
+
+router.get('/:id_role', _controllerUser._getAllUserByRole)
+router.get('/:id', _controllerUser._deleteUser)
+router.put('/:id', _controllerUser._updateUser)
 
 module.exports = router;
