@@ -1,24 +1,26 @@
 {
   "development": {
-    "username": "erwin",
-    "password": "erwin12,.",
+    "username": "futsalio",
+    "password": "futsalio",
     "database": "futsaliodb",
-    "host": "futsalio-db-instance.c9uvw3ussfnu.ap-southeast-1.rds.amazonaws.com",
+    "host": "futsaliodbinstance.c9uvw3ussfnu.ap-southeast-1.rds.amazonaws.com",
     "dialect": "postgres",
     "port": "5432"
   },
   "test": {
-    "username": "root",
-    "password": null,
-    "database": "database_test",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "username": "futsalio",
+    "password": "futsalio",
+    "database": "futsaliodb",
+    "host": "futsaliodbinstance.c9uvw3ussfnu.ap-southeast-1.rds.amazonaws.com",
+    "dialect": "postgres",
+    "port": "5432"
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "username": "futsalio",
+    "password": "futsalio",
+    "database": "futsaliodb",
+    "host": "futsaliodbinstance.c9uvw3ussfnu.ap-southeast-1.rds.amazonaws.com",
+    "dialect": "postgres",
+    "port": "5432"
   }
 }
