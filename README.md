@@ -7,6 +7,7 @@ futsalio for backend system
 - **User**
     - `id`
     - `email`
+    - `username`
     - `password`
     - `phone_number`
     - `full_name`
@@ -36,7 +37,7 @@ futsalio for backend system
         - post  : `/users/signup` | *user signup input data*
         - post  : `/users/signin` | *user signin by type email and password*
         - get   : `/users/:id_role` | *get all users by id_role*
-        - get   : `/users/:id` | *get user by specific id*
+        - delete   : `/users/:id` | *delete user by specific id*
         - put   : `/users/:id ` | *edit user by id*
 
 - **role** /roles/
@@ -60,3 +61,7 @@ by inputing email and password on logging form you got respon token
 
 if you want to authenticate this token place it in headers on your http request / AJAX.
 
+5. API
+```bash
+ec2-52-221-217-60.ap-southeast-1.compute.amazonaws.com
+```
