@@ -1,4 +1,4 @@
-const db = requre('../../models')
+const db = require('../../models')
 
 module.exports = {
     _create: (req, res) => {

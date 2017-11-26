@@ -41,7 +41,7 @@ module.exports = {
             })
         })
         .catch((err) => {
-            res.status(500).send(err)
+            res.status(500).send({msg: 'No Such User!'})
         })
     },
     _updateUser: (req, res) => {
