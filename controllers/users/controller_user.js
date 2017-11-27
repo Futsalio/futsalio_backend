@@ -25,10 +25,11 @@ module.exports = {
         })
     },
     _signIn: (req, res) => {
+        const Op = db.sequelize.Op
         db.user
         .findOne({
             where: {
-                email: req.body.email
+                [Op.or]: [{email: req.body.email}, {username: req.body.username}]  // (a = 5 OR a = 6)                
             }
         })
         .then((response) => {
@@ -37,12 +38,12 @@ module.exports = {
                     const token = jwt.sign({id: response.id, full_name: response.full_name, id_role: response.id_role}, '_secretKey')
                     res.status(200).send({token})
                 } else {
-                    res.status(500).send({msg: 'No Such User'})
+                    res.status(500).send({msg: 'Wrong Password!'})
                 }
             })
         })
         .catch((err) => {
-            res.status(500).send({msg: 'No Such User!'})
+            res.status(500).send({msg: 'Use Not Found!'})
         })
     },
     _getAllUser: (req, res) => {
@@ -54,7 +55,7 @@ module.exports = {
                                         users.point, 
                                         users.id_role, 
                                         roles.id, 
-                                        roles.name
+                                        roles.name as role
             FROM users 
             JOIN roles ON users.id_role = roles.id
         `, { type: db.user.sequelize.QueryTypes.SELECT })
@@ -74,7 +75,7 @@ module.exports = {
                                         users.point, 
                                         users.id_role, 
                                         roles.id, 
-                                        roles.name
+                                        roles.name as role
             FROM users 
             JOIN roles ON users.id_role = roles.id
             WHERE users.id = ${req.params.id}
@@ -124,7 +125,7 @@ module.exports = {
                 users.point, 
                 users.id_role, 
                 roles.id, 
-                roles.name
+                roles.name as role
         FROM users 
         JOIN roles ON users.id_role = roles.id
         WHERE users.id_role = ${req.params.id_role}
