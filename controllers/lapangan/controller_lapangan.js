@@ -16,7 +16,7 @@ module.exports = {
             res.status(500).send(err)
         })
     },
-    _updateAllLapangan: (req, res) => {
+    _ubahAllLapangan: (req, res) => {
         db.lapangans.findOne({
             where: {
                 id: req.params.id
@@ -33,9 +33,18 @@ module.exports = {
                     id: response.id
                 }
             })
+            .then((response) => {
+                res.status(200).send({message: 'updated'})
+            })
+            .catch((err) => {
+                res.status(500).send(err)
+            })
+        })
+        .catch((err) => {
+            res.status(500).send(err)
         })
     },
-    _updateOwnLapangan: (req, res) => {
+    _ubahOwnLapangan: (req, res) => {
         db.lapangans.findOne({
             where: {
                 id: req.params.id
@@ -52,16 +61,19 @@ module.exports = {
                     id: response.id
                 }
             })
+            .then((response) => {
+                res.status(200).send({message: 'updated'})
+            })
+            .catch((err) => {
+                res.status(500).send(err)
+            })
+        })
+        .catch((err) => {
+            res.status(500).send(err)
         })
     },
-    _getAll: (req, res) => {
-        db.lapangans.sequelize.query(`SELECT lapangans.*, 
-                                             tempat_futsals.name, 
-                                      FROM lapangans
-                                      JOIN tempat_futsals 
-                                      ON lapangans.id_tempat_futsal = tempat_futsals.id
-
-        `, { type: db.user.sequelize.QueryTypes.SELECT })
+    _lihatAllListLapangan: (req, res) => {
+        db.lapangans.findAll({})
         .then((response) => {
             res.status(200).send(response)
         })
@@ -69,7 +81,7 @@ module.exports = {
             res.status(500).send(err)
         })
     },
-    _getById: (req, res) => {
+    _lihatOwnListLapangan: (req, res) => {
         db.lapangans.findOne({
             where: {
                 id: req.params.id
@@ -77,6 +89,74 @@ module.exports = {
         })
         .then((response) => {
             res.status(200).send(response)
+        })
+        .catch((err) => {
+            res.status(500).send(err)
+        })
+    },
+    _lihatAllDetailLapangan: (req, res) => {
+        db.lapangans.findAll({})
+        .then((response) => {
+            res.status(200).send(response)
+        })
+        .catch((err) => {
+            res.status(500).send(err)
+        })
+    },
+    _lihatOwnDetailLapangan: (req, res) => {
+        db.lapangans.findOne({
+            where: {
+                id: req.params.id
+            }
+        })
+        .then((response) => {
+            res.status(200).send(response)
+        })
+        .catch((err) => {
+            res.status(500).send(err)
+        })
+    },
+    _hapusAllLapangan: (req, res) => {
+        db.lapangans.findOne({
+            where: {
+                id: req.params.id
+            }
+        })
+        .then((response) => {
+            db.destroy({
+                where: {
+                    id: response.id
+                }
+            })
+            .then((response) => {
+                res.status(200).send({message: 'deleted'})
+            })
+            .catch((err) => {
+                res.status(500).send(err)
+            })
+        })
+        .catch((err) => {
+            res.status(500).send(err)
+        })
+    },
+    _hapusOwnLapangan: (req, res) => {
+        db.lapangans.findOne({
+            where: {
+                id: req.params.id
+            }
+        })
+        .then((response) => {
+            db.destroy({
+                where: {
+                    id: response.id
+                }
+            })
+            .then((response) => {
+                res.status(200).send({message: 'deleted'})
+            })
+            .catch((err) => {
+                res.status(500).send(err)
+            })
         })
         .catch((err) => {
             res.status(500).send(err)
