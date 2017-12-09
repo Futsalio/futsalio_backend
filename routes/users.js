@@ -5,10 +5,10 @@ const auth = require('../controllers/auth/auth')
 /* GET users listing. */
 
 const sa = (req, res, next) => { auth._authSA, next() }
-const af = (req, res, next) => { auth._authAF , next() }
-const ot = (req, res, next) => { auth._authOT , next() }
-const at = (req, res, next) => { auth._authAT , next() }
-const p = (req, res, next) => { auth._authPengguna , next() }
+const af = (req, res, next) => { auth._authAF, next() }
+const ot = (req, res, next) => { auth._authOT, next() }
+const at = (req, res, next) => { auth._authAT, next() }
+const p = (req, res, next) => { auth._authPengguna, next() }
 
 
 router.post('/signup', api._signUp)
