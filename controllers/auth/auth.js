@@ -20,6 +20,8 @@ module.exports = {
                             if (response.id_role === decoded.id_role && response.id === decoded.id) {
                                 if (response.id_role === 1) {
                                     next()
+                                } else {
+                                    res.status(401).send({message: 'not_authed'})
                                 }
                             }
                         })
@@ -52,6 +54,8 @@ module.exports = {
                             if (response.id_role === decoded.id_role && response.id === decoded.id) {
                                 if (response.id_role === 2) {
                                     next()
+                                } else {
+                                    res.status(401).send({message: 'not_authed'})
                                 }
                             }
                         })
@@ -84,6 +88,8 @@ module.exports = {
                             if (response.id_role === decoded.id_role && response.id === decoded.id) {
                                 if (response.id_role === 3) {
                                     next()
+                                } else {
+                                    res.status(401).send({message: 'not_authed'})
                                 }
                             }
                         })
@@ -116,6 +122,8 @@ module.exports = {
                             if (response.id_role === decoded.id_role && response.id === decoded.id) {
                                 if (response.id_role === 4) {
                                     next()
+                                } else {
+                                    res.status(401).send({message: 'not_authed'})
                                 }
                             }
                         })
@@ -148,6 +156,8 @@ module.exports = {
                             if (response.id_role === decoded.id_role && response.id === decoded.id) {
                                 if (response.id_role === 5) {
                                     next()
+                                } else {
+                                    res.status(401).send({message: 'not_authed'})
                                 }
                             }
                         })
