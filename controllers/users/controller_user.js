@@ -35,6 +35,7 @@ module.exports = {
         })
         .then((response) => {
             bcrypt.compare(req.body.password, response.password, (err,resp) => {
+                console.log('response bcrypt - ', resp)
                 if (resp === true) {
                     const authorization = jwt.sign({id: response.id, full_name: response.full_name, id_role: response.id_role}, process.env.secretKey, {header: {algortihm: 'RS512'}})
                     res.status(200).send({authorization})
