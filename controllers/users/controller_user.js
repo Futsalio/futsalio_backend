@@ -1,8 +1,9 @@
 const db = require('../../models')
 const jwt = require('jsonwebtoken')
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 const saltRounds = 10;
 const salt = bcrypt.genSaltSync(saltRounds);
+require('dotenv').config()
 
 module.exports = {
     _signUp: (req, res) => {
@@ -35,15 +36,15 @@ module.exports = {
         .then((response) => {
             bcrypt.compare(req.body.password, response.password, (err,resp) => {
                 if (resp === true) {
-                    const token = jwt.sign({id: response.id, full_name: response.full_name, id_role: response.id_role}, '_secretKey')
-                    res.status(200).send({token})
+                    const authorization = jwt.sign({id: response.id, full_name: response.full_name, id_role: response.id_role}, process.env.secretKey, {header: {algortihm: 'RS512'}})
+                    res.status(200).send({authorization})
                 } else {
                     res.status(500).send({msg: 'Wrong Password!'})
                 }
             })
         })
         .catch((err) => {
-            res.status(500).send({msg: 'Use Not Found!'})
+            res.status(500).send({msg: 'User Not Found!'})
         })
     },
     _getAllUser: (req, res) => {

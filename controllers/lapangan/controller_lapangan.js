@@ -1,7 +1,7 @@
 const db = require('../../models')
 
 module.exports = {
-    _create: (req, res) => {
+    _createLapangan: (req, res) => {
         db.lapangans.create({
             id_tempat_futsal: req.body.id_tempat_futsal,
             photo: req.body.photo,
@@ -14,6 +14,44 @@ module.exports = {
         })
         .catch((err) => {
             res.status(500).send(err)
+        })
+    },
+    _updateAllLapangan: (req, res) => {
+        db.lapangans.findOne({
+            where: {
+                id: req.params.id
+            }
+        })
+        .then((response) => {
+            db.lapangans.update({
+                photo: req.body.photo === null ? response.photo : req.body.photo,
+                name: req.body.name === null ? response.name : req.body.name,
+                type: req.body.type === null ? response.type : req.body.type,
+                material: req.body.material === null ? response.material : req.body.material,
+            }, {
+                where: {
+                    id: response.id
+                }
+            })
+        })
+    },
+    _updateOwnLapangan: (req, res) => {
+        db.lapangans.findOne({
+            where: {
+                id: req.params.id
+            }
+        })
+        .then((response) => {
+            db.lapangans.update({
+                photo: req.body.photo === null ? response.photo : req.body.photo,
+                name: req.body.name === null ? response.name : req.body.name,
+                type: req.body.type === null ? response.type : req.body.type,
+                material: req.body.material === null ? response.material : req.body.material,
+            }, {
+                where: {
+                    id: response.id
+                }
+            })
         })
     },
     _getAll: (req, res) => {

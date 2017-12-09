@@ -1,7 +1,7 @@
 const db = require('../../models/tempat_futsal')
 
 module.exports = {
-    _create: (req, res) => {
+    _createTempatFutsal: (req, res) => {
         db.tempat_futsals.create({
             name: req.body.name,
             description: req.body.description,
@@ -16,28 +16,6 @@ module.exports = {
             keluarahan: req.body.keluarahan,
             province: req.body.province,
             city: req.body.city,
-        })
-        .then((response) => {
-            res.status(200).send(response)
-        })
-        .catch((err) => {
-            res.status(500).send(err)
-        })
-    },
-    _getAll: (req, res) => {
-        db.tempat_futsals.findAll({})
-        .then((response) => {
-            res.status(200).send(response)
-        })
-        .catch((err) => {
-            res.status(500).send(err)
-        })
-    },
-    _getById: (req, res) => {
-        db.tempat_futsals.findOne({
-            where: {
-                id: req.params.id
-            }
         })
         .then((response) => {
             res.status(200).send(response)
@@ -78,6 +56,37 @@ module.exports = {
             .catch((err) => {
                 res.status(500).send(err)
             })
+        })
+        .catch((err) => {
+            res.status(500).send(err)
+        })
+    },
+    _lihatAllListTempatFutsal: (req, res) => {
+        db.tempat_futsals.sequelize.query(``, {type: sequelize.QueryTypes.SELECT})
+        .then((response) => {
+            res.status(200).send(response)
+        })
+        .catch((err) => {
+            res.status(500).send(err)
+        })
+    },
+    _getAll: (req, res) => {
+        db.tempat_futsals.findAll({})
+        .then((response) => {
+            res.status(200).send(response)
+        })
+        .catch((err) => {
+            res.status(500).send(err)
+        })
+    },
+    _getById: (req, res) => {
+        db.tempat_futsals.findOne({
+            where: {
+                id: req.params.id
+            }
+        })
+        .then((response) => {
+            res.status(200).send(response)
         })
         .catch((err) => {
             res.status(500).send(err)
