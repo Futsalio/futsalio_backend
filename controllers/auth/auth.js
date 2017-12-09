@@ -1,29 +1,166 @@
 const jwt = require('jsonwebtoken')
 const db = require('../../models')
+require('dotenv').config()
 
 module.exports = {
-    authUser: function(req, res, next) {
-        let token = req.headers.token
-        if (!!token) {
-            jwt.verify(token, '_secretKey', (err, decoded) => {
-                if (!!err) {
-                    res.status(500).send(err)
-                } else {
-                    db.users.findOne({
-                        where: {
-                            id: decoded.id
-                        }
-                    })
-                    .then((response) => {
-                        next()
-                    })
-                    .catch((err) => {
+    _authSA: (req, res, next) => {
+        let token = req.headers.authorization
+        if (token) {
+            if (token.split(' ')[0] === 'Bearer') {
+                jwt.verify(token.split(' ')[1], process.env.secretKey, { algorithm: ['RS256'] }, (err, decoded) => {
+                    if (!!err) {
                         res.status(500).send(err)
-                    })
-                }
-            })
+                    } else {
+                        db.user.findOne({
+                            where: {
+                                id: decoded.id
+                            }
+                        })
+                        .then((response) => {
+                            if (response.id_role === decoded.id_role && response.id === decoded.id) {
+                                if (response.id_role === 1) {
+                                    next()
+                                }
+                            }
+                        })
+                        .catch((err) => {
+                            res.status(500).send({message: 'you are not authorized!'})
+                        })
+                    }
+                })
+            } else {
+                res.status(500).send({error: "not_authed"})
+            }
         } else {
-            res.status(500).send('login please!')
+            res.status(500).send({error: 'not_authed'})
         }
-    }
+    },
+    _authAF: (req, res, next) => {
+        let token = req.headers.authorization
+        if (token) {
+            if (token.split(' ')[0] === 'Bearer') {
+                jwt.verify(token.split(' ')[1], process.env.secretKey, { algorithm: ['RS256'] }, (err, decoded) => {
+                    if (!!err) {
+                        res.status(500).send(err)
+                    } else {
+                        db.user.findOne({
+                            where: {
+                                id: decoded.id
+                            }
+                        })
+                        .then((response) => {
+                            if (response.id_role === decoded.id_role && response.id === decoded.id) {
+                                if (response.id_role === 2) {
+                                    next()
+                                }
+                            }
+                        })
+                        .catch((err) => {
+                            res.status(500).send({message: 'you are not authorized!'})
+                        })
+                    }
+                })
+            } else {
+                res.status(500).send({error: "not_authed"})
+            }
+        } else {
+            res.status(500).send({error: 'not_authed'})
+        }
+    },
+    _authOT: (req, res, next) => {
+        let token = req.headers.authorization
+        if (token) {
+            if (token.split(' ')[0] === 'Bearer') {
+                jwt.verify(token.split(' ')[1], process.env.secretKey, { algorithm: ['RS256'] }, (err, decoded) => {
+                    if (!!err) {
+                        res.status(500).send(err)
+                    } else {
+                        db.user.findOne({
+                            where: {
+                                id: decoded.id
+                            }
+                        })
+                        .then((response) => {
+                            if (response.id_role === decoded.id_role && response.id === decoded.id) {
+                                if (response.id_role === 3) {
+                                    next()
+                                }
+                            }
+                        })
+                        .catch((err) => {
+                            res.status(500).send({message: 'you are not authorized!'})
+                        })
+                    }
+                })
+            } else {
+                res.status(500).send({error: "not_authed"})
+            }
+        } else {
+            res.status(500).send({error: 'not_authed'})
+        }
+    },
+    _authAT: (req, res, next) => {
+        let token = req.headers.authorization
+        if (token) {
+            if (token.split(' ')[0] === 'Bearer') {
+                jwt.verify(token.split(' ')[1], process.env.secretKey, { algorithm: ['RS256'] }, (err, decoded) => {
+                    if (!!err) {
+                        res.status(500).send(err)
+                    } else {
+                        db.user.findOne({
+                            where: {
+                                id: decoded.id
+                            }
+                        })
+                        .then((response) => {
+                            if (response.id_role === decoded.id_role && response.id === decoded.id) {
+                                if (response.id_role === 4) {
+                                    next()
+                                }
+                            }
+                        })
+                        .catch((err) => {
+                            res.status(500).send({message: 'you are not authorized!'})
+                        })
+                    }
+                })
+            } else {
+                res.status(500).send({error: "not_authed"})
+            }
+        } else {
+            res.status(500).send({error: 'not_authed'})
+        }
+    },
+    _authPengguna: (req, res, next) => {
+        let token = req.headers.authorization
+        if (token) {
+            if (token.split(' ')[0] === 'Bearer') {
+                jwt.verify(token.split(' ')[1], process.env.secretKey, { algorithm: ['RS256'] }, (err, decoded) => {
+                    if (!!err) {
+                        res.status(500).send(err)
+                    } else {
+                        db.user.findOne({
+                            where: {
+                                id: decoded.id
+                            }
+                        })
+                        .then((response) => {
+                            if (response.id_role === decoded.id_role && response.id === decoded.id) {
+                                if (response.id_role === 5) {
+                                    next()
+                                }
+                            }
+                        })
+                        .catch((err) => {
+                            res.status(500).send({message: 'you are not authorized!'})
+                        })
+                    }
+                })
+            } else {
+                res.status(500).send({error: "not_authed"})
+            }
+        } else {
+            res.status(500).send({error: 'not_authed'})
+        }
+    },
 }
