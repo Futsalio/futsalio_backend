@@ -50,12 +50,12 @@ futsalio for backend system
 
 4. Example User Login Response
 
-by inputing email and password on logging form you got respon token
+by inputing email and password on logging form you got respon authorization `Bearer`
 ```javascript
     email: youremail@email.com
     password: yourpassword
     {
-    "token":         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZnVsbF9uYW1lIjoiYWRtaW4iLCJpYXQiOjE1MTE3MDU4NjF9.jNgH6ZvrD2wDmd6bdpZ0vxRgcNgxNsU3UdLg2FRD4LA"
+    "authorization":         "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZnVsbF9uYW1lIjoiYWRtaW4iLCJpYXQiOjE1MTE3MDU4NjF9.jNgH6ZvrD2wDmd6bdpZ0vxRgcNgxNsU3UdLg2FRD4LA"
     }
 ```
 
