@@ -9,6 +9,7 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 var roles = require('./routes/roles');
 var tempat_futsals = require('./routes/tempat_futsals');
+var lapangans = require('./routes/lapangans');
 
 var app = express();
 
@@ -28,6 +29,7 @@ app.use('/', index);
 app.use('/api/users', users);
 app.use('/api/roles', roles);
 app.use('/api/tempat_futsals', tempat_futsals);
+app.use('/api/lapangans', lapangans);
 
 // catch 404 and forward to error handler
 // app.use(function(req, res, next) {

@@ -12,7 +12,7 @@ const p = (req, res, next) => { auth._authPengguna, next() }
 
 router.post('/', [sa, af], api._createTempatFutsal);
 
-router.get('/:id', [sa, af], api._lihatAllDetailTempatFutsal)
+router.get('/detail/:id', [sa, af], api._lihatAllDetailTempatFutsal)
 router.get('/:id', [sa, af], api._lihatAllListTempatFutsal)
 
 router.delete('/:id', [sa], api._hapusTempatFutsal)
