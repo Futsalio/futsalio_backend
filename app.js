@@ -11,6 +11,8 @@ var roles = require('./routes/roles');
 var tempat_futsals = require('./routes/tempat_futsals');
 var lapangans = require('./routes/lapangans');
 
+var secret = require('./routes/secret');
+
 var app = express();
 
 // view engine setup
@@ -30,6 +32,8 @@ app.use('/api/users', users);
 app.use('/api/roles', roles);
 app.use('/api/tempat_futsals', tempat_futsals);
 app.use('/api/lapangans', lapangans);
+
+app.use('/api/secret', secret);
 
 // catch 404 and forward to error handler
 // app.use(function(req, res, next) {

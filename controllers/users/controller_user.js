@@ -9,9 +9,9 @@ module.exports = {
     _signUp: (req, res) => {
         var hash = bcrypt.hashSync(req.body.password, salt);
         db.user
-        .create({ 
-            email: req.body.email, 
-            username: req.body.username, 
+        .create({
+            email: req.body.email,
+            username: req.body.username,
             password: hash,
             phone_number: req.body.phone_number,
             full_name: req.body.full_name,
@@ -30,7 +30,7 @@ module.exports = {
         db.user
         .findOne({
             where: {
-                [Op.or]: [{email: req.body.email}, {username: req.body.username}]  // (a = 5 OR a = 6)                
+                [Op.or]: [{email: req.body.email}, {username: req.body.username}]  // (a = 5 OR a = 6)
             }
         })
         .then((response) => {
@@ -38,7 +38,13 @@ module.exports = {
                 console.log('response bcrypt - ', resp)
                 if (resp === true) {
                     const authorization = jwt.sign({id: response.id, full_name: response.full_name, id_role: response.id_role}, process.env.secretKey, {header: {algortihm: 'RS512'}})
-                    res.status(200).send({authorization})
+                    const info = {
+                        user: [
+                            { id: response.id},
+                            { id_role: response.id_role}
+                        ]
+                    }
+                    res.status(200).send({authorization, info})
                 } else {
                     res.status(500).send({msg: 'Wrong Password!'})
                 }
@@ -49,16 +55,16 @@ module.exports = {
         })
     },
     _getAllUser: (req, res) => {
-        db.user.sequelize.query(`SELECT users.id, 
-                                        users.email, 
-                                        users.username, 
-                                        users.phone_number, 
-                                        users.full_name, 
-                                        users.point, 
-                                        users.id_role, 
-                                        roles.id, 
+        db.user.sequelize.query(`SELECT users.id,
+                                        users.email,
+                                        users.username,
+                                        users.phone_number,
+                                        users.full_name,
+                                        users.point,
+                                        users.id_role,
+                                        roles.id,
                                         roles.name as role
-            FROM users 
+            FROM users
             JOIN roles ON users.id_role = roles.id
         `, { type: db.user.sequelize.QueryTypes.SELECT })
         .then((response) => {
@@ -69,16 +75,16 @@ module.exports = {
         })
     },
     _getUserById: (req, res) => {
-        db.user.sequelize.query(`SELECT users.id, 
-                                        users.email, 
-                                        users.username, 
-                                        users.phone_number, 
-                                        users.full_name, 
-                                        users.point, 
-                                        users.id_role, 
-                                        roles.id, 
+        db.user.sequelize.query(`SELECT users.id,
+                                        users.email,
+                                        users.username,
+                                        users.phone_number,
+                                        users.full_name,
+                                        users.point,
+                                        users.id_role,
+                                        roles.id,
                                         roles.name as role
-            FROM users 
+            FROM users
             JOIN roles ON users.id_role = roles.id
             WHERE users.id = ${req.params.id}
         `, { type: db.user.sequelize.QueryTypes.SELECT })
@@ -119,16 +125,16 @@ module.exports = {
         })
     },
     _getAllUserByRole: (req, res) => {
-        db.user.sequelize.query(`SELECT users.id, 
-                users.email, 
-                users.username, 
-                users.phone_number, 
-                users.full_name, 
-                users.point, 
-                users.id_role, 
-                roles.id, 
+        db.user.sequelize.query(`SELECT users.id,
+                users.email,
+                users.username,
+                users.phone_number,
+                users.full_name,
+                users.point,
+                users.id_role,
+                roles.id,
                 roles.name as role
-        FROM users 
+        FROM users
         JOIN roles ON users.id_role = roles.id
         WHERE users.id_role = ${req.params.id_role}
         `, { type: db.user.sequelize.QueryTypes.SELECT })
