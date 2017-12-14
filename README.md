@@ -18,13 +18,13 @@ futsalio for backend system
     - `name`
 
 2. Role List`s
-    - SA 
+    - SA
         - Super Admin
     - AF
         - Admin Futsalio
-    - OT 
+    - OT
         - Owner Tempat Futsal
-    - AT 
+    - AT
         - Admin Tempat Futsal
     - Pengguna
         - Users Biasa ( pemain futsal yang ingin book lapangan )
@@ -33,7 +33,7 @@ futsalio for backend system
 ---
 
 - **user** /users/
-    - `routes` 
+    - `routes`
         - post  : `/users/signup` | *user signup input data*
         - post  : `/users/signin` | *user signin by type email and password*
         - get   : `/users/:id_role` | *get all users by id_role*
@@ -64,4 +64,23 @@ if you want to authenticate this token place it in headers on your http request 
 5. API
 ```bash
 ec2-52-221-217-60.ap-southeast-1.compute.amazonaws.com
+```
+
+6. API verify token di gunakan setelah login untuk cek id_role page front end akan mengikuti sesuai role yang keluar dari decoded ini
+```
+method post: /api/secret/verify
+
+masukan -> authorization = 'Bearer {your_access_token}'
+```
+
+output JSON:
+```
+{
+    "userinfo": {
+        "id": 3,
+        "full_name": "erwin",
+        "id_role": 3,
+        "iat": 1513240718
+    }
+}
 ```
