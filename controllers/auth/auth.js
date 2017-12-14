@@ -173,4 +173,22 @@ module.exports = {
             res.status(500).send({error: 'not_authed'})
         }
     },
+    doDecode: (req, res, next) => {
+      let token = req.body.authorization
+      if (token) {
+        if (token.split(' ')[0] === 'Bearer') {
+          jwt.verify(token.split(' ')[1], process.env.secretKey, { algorithm: ['RS256'] }, (err, data) => {
+            if(err) {
+              res.status(500).send(err)
+            } else {
+              res.status(200).send({userinfo: data})
+            }
+          })
+        } else {
+          res.status(500).send({message: 'wrong access_token'})
+        }
+      } else {
+        res.status(500).send({message: 'no such user!'})
+      }
+    }
 }
